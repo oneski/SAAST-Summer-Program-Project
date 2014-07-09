@@ -12,15 +12,6 @@ def calculate_check(ISBN):
 
 calculate_check_test("123456789X")
 
-"""CALCULATE THE CHECK DIGIT"""
-
-listt = range(1,10)
-
-print listt
-
-listtt = list("asdf")
-
-print listtt;
 
 """ZIP IS A FUNCTION THAT TAKES 2 LISTS, [1,2,3] and [a,b,c] RESULT IS TUPLE LIST[(1,a),(2,b),(3,c)]
 
