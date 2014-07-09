@@ -3,16 +3,14 @@ def is_isbn(input):
 	"""TAKE ISBN RETURN TRUE IF VALID"""
 
 def calculate_check(ISBN):
+	"""CALCULATE THE CHECK DIGIT"""
 	if(len(ISBN)<=8 or len(ISBN)>=11):
 		raise ValueError("Invalid String Format")
 	else:
-		isbn9 = ISBN[:9]
-		abc = [int(a)*b for a,b in zip(list(isbn9),range(1,10))]
-		print abc
-		print sum(abc)%11
-def isbn_sum():
-	pass
-calculate_check("123456789X")
+		return sum([int(a)*b for a,b in zip(list(ISBN[:9]),range(1,10))])%11
+
+
+calculate_check_test("123456789X")
 
 """CALCULATE THE CHECK DIGIT"""
 
