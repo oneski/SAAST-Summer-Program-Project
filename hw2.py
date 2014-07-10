@@ -9,10 +9,7 @@ def is_isbn(ISBN):
 			checkDigit = calculate_check(ISBN)
 			if(checkDigit == 10):
 				checkDigit = "X"
-			if(str(checkDigit) == ISBN[9]):
-				return True
-			else:
-				return False
+			return str(checkDigit) == ISBN[9]
 
 def calculate_check(ISBN):
 	"""CALCULATE THE CHECK DIGIT"""
@@ -23,13 +20,6 @@ def calculate_check(ISBN):
 			raise ValueError("Invalid String Format")
 		else:
 			return sum([int(a)*b for a,b in zip(list(ISBN[:9]),range(1,10))])%11
-
-print calculate_check("123456789X")
-print is_isbn("123456789X")
-
-print ""
-print calculate_check("0821836994")
-print is_isbn("0821836994")
 
 
 #TO DO:
