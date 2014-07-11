@@ -1,6 +1,8 @@
 '''
 input a list, return with a list of all the permutations of the list
 '''
+#ORIGINAL VERSION
+"""
 from random import shuffle
 from math import factorial
 debugTest = 0
@@ -34,21 +36,7 @@ def safe_permutations(listt,debugTest):
 	
 
 #print safe_permutations([1,2,3,4,5,6],debugTest)
-
-def remover(listt,index):
-	output = []
-	for item in listt:
-		print item
-		print listt[index]
-		if(listt[index] != item):
-			print item
-			output += [item]
-	return output
-
-def permutations_final(listt):
-	#enjoy
-	pass
-
+"""
 """
 GOAL OF FINAL VERSION:
 
@@ -74,3 +62,20 @@ output = []
 return [[1,2,3],[1,3,2]...[3,2,1]]
 
 """
+#FINAL VERSION
+def permutate(inputt):
+	output = []
+	def iterate(listBuiltSoFar, leftoverInput):
+		if len(leftoverInput) == 1:
+			listBuiltSoFar.append(leftoverInput[0])
+			output.append(listBuiltSoFar)
+		else:	
+			for i in range(len(leftoverInput)):
+				tempLeftover = [x for x in leftoverInput]
+				tempLeftover.pop(i)
+				tempListBuilt = [x for x in listBuiltSoFar]
+				tempListBuilt.append(leftoverInput[i])
+				iterate(tempListBuilt, tempLeftover)
+	iterate([], inputt)
+	return output
+print permutate(range(9))
