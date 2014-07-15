@@ -4,7 +4,11 @@ grammar = { "<s>" : ["<np> <vp"]
 			, "<dp>" :	["<dp> <adjp> <n>", "<np>"]
 			, "<adjp>" : ["<adj>","<adj> <adjp>"]
 			, "<adj>" : ["big,""fat","green|wonderful|faulty|subliminal|pretentious"]
-			, "<>" : ["d"]
+			,"<n>" : ["dog","cat","man","university","father","mother","child","television"]
+			,"<pn>" : ["John|Jane|Sally|Spot|Fred|Elmo"]
+			,"<vp>" : ["<tv> <np>","<iv>"]
+			,"<tv>" : ["hit","honored","kissed","helped"]
+			,"<iv>" : "died","collapsed","laughed","wept"]
 }
 
 
