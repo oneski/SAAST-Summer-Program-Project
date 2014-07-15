@@ -1,4 +1,5 @@
 
+'''
 grammar = { "<s>" : ["<np> <vp"]
 			,"<np>" : ["<dp> <adjp> <n>","np>"]
 			, "<dp>" :	["<dp> <adjp> <n>", "<np>"]
@@ -10,17 +11,15 @@ grammar = { "<s>" : ["<np> <vp"]
 			,"<tv>" : ["hit","honored","kissed","helped"]
 			,"<iv>" : "died","collapsed","laughed","wept"]
 		}
-
+'''
 def make_grammar(filename):
 	#string -> map(string
-	s = []
 	diction = {}
 	f = open(filename).readlines()
 	f = [item.replace("\n", "") for item in f]
 	g = [item.split("::=") for item in f]
 	for i in range(0, len(g)):
 		g[i][1] = g[i][1].split("|")
-
 	for i in range(0, len(g)):
 		diction[g[i][0]] = g[i][1]
 	return diction
