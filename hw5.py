@@ -2,7 +2,9 @@ import random
 grammar = { "<s>" : ["<np> <vp"]
 			,"<np>" : ["<dp> <adjp> <n>","np>"]
 			, "<dp>" :	["<dp> <adjp> <n>", "<np>"]
-			, ""
+			, "<adjp>" : ["<adj>","<adj> <adjp>"]
+			, "<adj>" : ["big,""fat","green|wonderful|faulty|subliminal|pretentious"]
+			, "<>" : ["d"]
 }
 
 
