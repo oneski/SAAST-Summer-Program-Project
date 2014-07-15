@@ -61,7 +61,7 @@ def armor(item, filename):
 	for i in lines:
 		if i[0] == item:
 			a = int(i[1])
-			b = int(i[2]) + 1
+			b = int(i[2])
 			rand =  random.randint(a, b)
 			return rand
 
