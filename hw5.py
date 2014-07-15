@@ -1,5 +1,4 @@
-'''
-import random
+
 grammar = { "<s>" : ["<np> <vp"]
 			,"<np>" : ["<dp> <adjp> <n>","np>"]
 			, "<dp>" :	["<dp> <adjp> <n>", "<np>"]
@@ -10,8 +9,7 @@ grammar = { "<s>" : ["<np> <vp"]
 			,"<vp>" : ["<tv> <np>","<iv>"]
 			,"<tv>" : ["hit","honored","kissed","helped"]
 			,"<iv>" : "died","collapsed","laughed","wept"]
-}
-'''
+		}
 
 def make_grammar(filename):
 	#string -> map(string
