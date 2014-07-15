@@ -1,0 +1,7 @@
+Treasure Class,Item1,Item2,Item3
+armo3,Quilted Armor,Buckler,Leather Armor
+weap60a,Wrist Sword,Ogre Axe,Blade Bow
+armo60b,Sacred Rondache,Mage Plate,Diadem
+Act 5 (H) Equip A,weap60a,weap60a,weap60a
+Act 5 (H) Equip B,armo60b,armo60b,Act 5 (H) Equip A
+Cow (H),Act 5 (H) Equip B,armo3,armo3

@@ -1,0 +1,4 @@
+name,mindam,maxdam,wclass
+Wrist Sword,19,44,ht1
+Ogre Axe,28,145,stf
+Blade Bow,21,43,bow

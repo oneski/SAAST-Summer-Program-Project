@@ -1,0 +1,2 @@
+Class,Type,Level,TreasureClass
+Hell Bovine,Cow,90,Cow (H)
