@@ -7,8 +7,9 @@ grammar = { "<s>" : ["<np> <vp"]
 
 
 def make_grammar(filename):
-	#string -> map(string)
-	pass
+	#string -> map(string
+	f = open(filename).readlines()
+	
 
 def generate(grammer, tok):
 	#0. Determine if tok is a terminal or non-terminal
