@@ -5,6 +5,7 @@ from drawingpanel import *
 class WordGenerator:
 	def __init__(self, files):
 		self.lastAccess = 0
+		self.in_quotes = False
 		with open(files) as f:
 			temp = []
 			for line in f.readlines():
@@ -13,9 +14,15 @@ class WordGenerator:
 		
 	def next_word(self):
 		if(self.lastAccess<len(self.words)):
+			temp = self.in_quotes
 			output = self.words[self.lastAccess]
+			if self.in_quotes == False and "\"" in self.words[self.lastAccess]:
+				temp = True
+				self.in_quotes = True
+			if self.in_quotes == True and "\"" in self.words[self.lastAccess]:
+				self.in_quotes = False
 			self.lastAccess += 1
-			return output
+			return (output, temp)
 		else:
 			raise ValueError("End of File")
 
@@ -47,22 +54,22 @@ def animate(generator, height=500,width=500,fontt=16,timeout=200):
 
 	while True:
 		try:
-			 canvas.create_rectangle(0, 0, height, width, fill = "white")
-			 word = generator.next_word()
-			 if(word[1]):
-				 if(word[len(word[0])-1] == "." or word[len(word[0])-1] == "," or word[len(word[0])-1] == ":" or word[len(word[0])-1] == ";" or word[len(word[0])-1] == "!" or word[len(word[0])-1] == "?"):
-				 	create_textt(canvas,fonter,word,"#00b")
-				 	sleep(canvas,timeout*1.3)
-				 else:
-				 	create_textt(canvas,fonter,word,"#00b")
-				 	sleep(canvas,timeout)
+			canvas.create_rectangle(0, 0, height, width, fill = "white")
+			word = generator.next_word()
+			if(word[1]):
+				if(word[len(word[0])-1] == "." or word[len(word[0])-1] == "," or word[len(word[0])-1] == ":" or word[len(word[0])-1] == ";" or word[len(word[0])-1] == "!" or word[len(word[0])-1] == "?"):
+					create_textt(canvas,fonter,word,"#00b")
+					sleep(canvas,timeout*1.3)
+				else:
+					create_textt(canvas,fonter,word,"#00b")
+					sleep(canvas,timeout)
 			else:
 				if(word[len(word[0])-1] == "." or word[len(word[0])-1] == "," or word[len(word[0])-1] == ":" or word[len(word[0])-1] == ";" or word[len(word[0])-1] == "!" or word[len(word[0])-1] == "?"):
-				 	create_textt(canvas,fonter,word)
-				 	sleep(canvas,timeout*1.3)
-				 else:
-				 	create_textt(canvas,fonter,word)
-				 	sleep(canvas,timeout)
+					create_textt(canvas,fonter,word)
+					sleep(canvas,timeout*1.3)
+				else:
+					create_textt(canvas,fonter,word)
+					sleep(canvas,timeout)
 		except ValueError:
 			print "End of File"
 			break
