@@ -1,10 +1,8 @@
 from drawingpanel import *
 
 def animate(generator, files="text.txt", height=500,width=500,fontt=16,timeout=200):
-	
 	def create_textt(canvas,fontr,textt):
 		canvas.create_text(height/2,width/2,text=textt,font=fontr)
-
 
 	def sleep(obj,timee):
 		obj.update()
@@ -14,7 +12,6 @@ def animate(generator, files="text.txt", height=500,width=500,fontt=16,timeout=2
 	fonter = ("Helvetica", fontt)
 	panal = DrawingPanel(height,width)
 	canvas = panal.canvas
-	
 
 	while True:
 		try:

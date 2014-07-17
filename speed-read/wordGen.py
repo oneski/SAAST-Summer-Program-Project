@@ -7,14 +7,18 @@ class WordGenerator:
 	def __init__(self, files):
 		self.lastAccess = 0
 		with open(files) as f:
-			self.words = f.readlines()[0].split().strip()
+			temp = []
+			for line in f.readlines():
+				temp.extend(line.split())
+			self.words = temp
 		
-	def hit(self,stack):
+	def next_word(self):
 		if(self.lastAccess<len(self.words)):
-			output =  self.words[lastAccess]
+			output = self.words[self.lastAccess]
 			self.lastAccess += 1
 			return output
 		else:
 			raise ValueError("End of File")
-		stack.lastAccess += 1
 
+	def is_empty(self):
+		return True if self.lastAccess >= len(self.words) else False

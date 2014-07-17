@@ -71,4 +71,5 @@ def armor(item):
 			a = int(i[1])
 			b = int(i[2])
 			return random.randint(a, b)
-print loot_generator()
+
+loot_generator()
