@@ -19,13 +19,20 @@ class WordGenerator:
 			if a <= 1:
 				index = output[0]
 			elif a <= 5: 
-				index = " " + output[1] + " " * (a - 2)
+				index = " " * (a - 2) + output[1] + " " * (a - 2)
+				if a == 2:
+					output = output[0] + "  "
+				else:
+					output = " " * (a - 3) + output[0] + " " + output[2:]
 			elif a <= 9:
-				index = "  " + output[2] + " " * (a - 3)
+				index = " " * (a - 3) + output[2] + " " * (a - 3)
+				output = " " * (a - 5) + output[:2] + " " + output[3:]
 			elif a <= 13:
-				index = "   " + output[3] + " " * (a - 4)
+				index = " " * (a - 4) + output[3] + " " * (a - 4)
+				output = " " * (a - 7) + output[:3] + " " + output[4:]
 			else:
-				index = "    " + output[4] + " " * (a - 5)
+				index = " " * (a - 5) + output[4] + " " * (a - 5)
+				output = " " * (a - 9) + output[:4] + " " + output[5:]
 			self.lastAccess += 1
 			if '"' in output:
 				if(self.in_quotes):
