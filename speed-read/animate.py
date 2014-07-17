@@ -1,6 +1,6 @@
 from drawingpanel import *
 
-def animate(files="text.txt", height=500,width=500,fontt=16,timeout=200):
+def animate(generator, files="text.txt", height=500,width=500,fontt=16,timeout=200):
 	
 	def create_textt(canvas,fontr,textt):
 		canvas.create_text(height/2,width/2,text=textt,font=fontr)
@@ -18,7 +18,7 @@ def animate(files="text.txt", height=500,width=500,fontt=16,timeout=200):
 
 	while True:
 		try:
-			 word = gen.next_word()
+			 word = generator.next_word()
 			 create_textt(canvas,fonter,word)
 			 sleep(canvas,timeout)
 		except ValueError:
@@ -26,4 +26,4 @@ def animate(files="text.txt", height=500,width=500,fontt=16,timeout=200):
 			break
 
 
-animate()
+animate(gen)
