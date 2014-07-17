@@ -42,3 +42,14 @@ def preSuf(a):
 	#f = open(inputFile).readlines()
 
 print preSuf(randint(0,3))
+
+'''
+def armor(item):
+	with open("armor.txt") as f:
+		lines = f.readlines()
+	items = [i.split(",")[0] for i in lines[1:]]
+	print items
+	print items.index(item)
+	a, b = items[items.index(item)].split(",")[1], items[items.index(item)].split(",")[2]
+	return random.randint(a, b + 1)
+'''

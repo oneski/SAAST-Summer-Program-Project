@@ -2,6 +2,7 @@ import random
 from random import randint
 
 def loot_generator():
+<<<<<<< HEAD
 	pickedTC = "Cow (H)"
 	item = TC(pickedTC)
 	# defense = armor(item)
@@ -9,6 +10,19 @@ def loot_generator():
 
 	print preSufData[0] + item + preSufData[2]
 	#print "Defense: " + defense
+=======
+	monster = genMonster()
+	item = TC(monster[3])
+	defense = armor(item)
+	preSufData = preSuf(randint(0, 3))
+
+	print "Fighting " + monster[0] + " (Level " + monster[1] + " " + monster[2] + ")..."
+	print "You have slain " + monster[0]
+	print monster[0] + " dropped:"
+	print ""
+	print preSufData[0] + item + preSufData[2]
+	print "Defense: " + str(defense)
+>>>>>>> FETCH_HEAD
 	if preSufData[1] != "": print preSufData[1]
 	if preSufData[3] != "": print preSufData[3]
 
@@ -51,4 +65,24 @@ def preSuf(a):
 		suff = preSuf(2)
 		return (pref[0],pref[1],suff[2],suff[3])
 
+<<<<<<< HEAD
 loot_generator()
+=======
+def genMonster():
+	with open("monstats.txt") as f:
+		lines = [x.replace("\n", "") for x in f.readlines()[1:]]
+	g = [item.split(",") for item in lines]
+	monster = g[random.randint(0,len(g)-1)]
+	return monster
+
+def armor(item):
+	with open("armor.txt") as f:
+		lines = [n.replace("\n", "").split(",") for n in f.readlines()[1:]]
+
+	for i in lines:
+		if i[0] == item:
+			a = int(i[1])
+			b = int(i[2])
+			return random.randint(a, b)
+print loot_generator()
+>>>>>>> FETCH_HEAD
