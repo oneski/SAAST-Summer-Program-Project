@@ -33,8 +33,8 @@ def main(args):
 		print "fuck off"
 
 def animate(generator, height=500,width=500,fontt=16,timeout=200):
-	def create_textt(canvas,fontr,textt):
-		canvas.create_text(height/2,width/2,text=textt,font=fontr)
+	def create_textt(canvas,fontr,textt,colorr="#FFF"):
+		canvas.create_text(height/2,width/2,text=textt,font=fontr,color=colorr)
 
 	def sleep(obj,timee):
 		obj.update()
@@ -49,12 +49,20 @@ def animate(generator, height=500,width=500,fontt=16,timeout=200):
 		try:
 			 canvas.create_rectangle(0, 0, height, width, fill = "white")
 			 word = generator.next_word()
-			 if(word[len(word)-1] == "." or word[len(word)-1] == "," or word[len(word)-1] == ":" or word[len(word)-1] == ";" or word[len(word)-1] == "!" or word[len(word)-1] == "?"):
-			 	create_textt(canvas,fonter,word)
-			 	sleep(canvas,timeout*1)
-			 else:
-			 	create_textt(canvas,fonter,word)
-			 	sleep(canvas,timeout)
+			 if(word[1]):
+				 if(word[len(word[0])-1] == "." or word[len(word[0])-1] == "," or word[len(word[0])-1] == ":" or word[len(word[0])-1] == ";" or word[len(word[0])-1] == "!" or word[len(word[0])-1] == "?"):
+				 	create_textt(canvas,fonter,word,"#00b")
+				 	sleep(canvas,timeout*1.3)
+				 else:
+				 	create_textt(canvas,fonter,word,"#00b")
+				 	sleep(canvas,timeout)
+			else:
+				if(word[len(word[0])-1] == "." or word[len(word[0])-1] == "," or word[len(word[0])-1] == ":" or word[len(word[0])-1] == ";" or word[len(word[0])-1] == "!" or word[len(word[0])-1] == "?"):
+				 	create_textt(canvas,fonter,word)
+				 	sleep(canvas,timeout*1.3)
+				 else:
+				 	create_textt(canvas,fonter,word)
+				 	sleep(canvas,timeout)
 		except ValueError:
 			print "End of File"
 			break
