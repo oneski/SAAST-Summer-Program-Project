@@ -32,7 +32,7 @@ def main(args):
 	else:
 		print "fuck off"
 
-def animate(generator, files="text.txt", height=500,width=500,fontt=16,timeout=200):
+def animate(generator, height=500,width=500,fontt=16,timeout=200):
 	def create_textt(canvas,fontr,textt):
 		canvas.create_text(height/2,width/2,text=textt,font=fontr)
 
