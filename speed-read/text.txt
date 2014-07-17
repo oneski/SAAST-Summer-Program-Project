@@ -1,9 +1,33 @@
-The quick brown fox jumped over the lazy dog.
+The quick brown fox jumped; over the lazy dog.
+
+
+
+
+
+BLUE
+
+
+BROWN
+
+GREEN
+
+RED
+
+YELLOW
+
+
+
+LAZY
+ACTIVE
+PREPPY
+SWAGGY
+
+
 Terrible pot pie.
 John
-Sucks
+Sucks:
 But
-Not
+Not!
 Really
-SIke
+SIke?
 double sike

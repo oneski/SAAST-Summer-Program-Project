@@ -49,8 +49,12 @@ def animate(generator, height=500,width=500,fontt=16,timeout=200):
 		try:
 			 canvas.create_rectangle(0, 0, height, width, fill = "white")
 			 word = generator.next_word()
-			 create_textt(canvas,fonter,word)
-			 sleep(canvas,timeout)
+			 if(word[len(word)-1] == "." or word[len(word)-1] == "," or word[len(word)-1] == ":" or word[len(word)-1] == ";" or word[len(word)-1] == "!" or word[len(word)-1] == "?"):
+			 	create_textt(canvas,fonter,word)
+			 	sleep(canvas,timeout*1)
+			 else:
+			 	create_textt(canvas,fonter,word)
+			 	sleep(canvas,timeout)
 		except ValueError:
 			print "End of File"
 			break
