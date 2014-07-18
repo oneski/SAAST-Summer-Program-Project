@@ -6,8 +6,13 @@ def create_inventory(s):
     return {k : v for k, v in z}
 
 def subtract(li1, li2):
-    diffs = [math.abs(li1.count(c) - li2.count(c)) for c in li1]
-    return {[chr(c) for c in range(ord('a'), ord('z') + 1)] : diffs}
+    
+    result = {}
+    diffs = []
+    for i in range(0, len(li1.values())):
+        diffs.append(abs(li1[chr( ord('a') + i )] - li2[chr( ord('a') + i)]))
+    z = zip([chr(c) for c in range(ord('a'), ord('z') + 1)], diffs)
+    return {k : v for k,v in z}
 
 def is_in(li1, li2):
     v1 = li1.values()
@@ -30,4 +35,4 @@ def to_str(li):
         result += values[i] * str(keys[i])
     return result
 
-print to_str((create_inventory("helloworld")))
+print subtract(create_inventory("hello"), create_inventory("helloworld"))
