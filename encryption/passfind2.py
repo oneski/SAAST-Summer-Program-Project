@@ -73,24 +73,6 @@ def to_str(li):
         result += values[i] * str(keys[i])
     return result
 
+print notMain("doghousezoo", "wordlist.txt")
 
 
-
-
-
-
-	"""def permutate(inputt):
-	output = []
-	def iterate(listBuiltSoFar, leftoverInput):
-		if len(leftoverInput) == 1:
-			listBuiltSoFar.append(leftoverInput[0])
-			output.append(listBuiltSoFar)
-		else:	
-			for i in range(len(leftoverInput)):
-				tempLeftover = [x for x in leftoverInput]
-				tempLeftover.pop(i)
-				tempListBuilt = [x for x in listBuiltSoFar]
-				tempListBuilt.append(leftoverInput[i])
-				iterate(tempListBuilt, tempLeftover)
-	iterate([], inputt)
-	return output"""
