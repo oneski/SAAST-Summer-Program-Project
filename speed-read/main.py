@@ -70,8 +70,8 @@ def animate(generator, height=500,width=500,fontt=16,timeout=200):
 		obj.update()
 
 	fonter = ("Courier", fontt)
-	panal = DrawingPanel(height,width)
-	canvas = panal.canvas
+	
+	
 
 	while True:
 		try:
