@@ -22,8 +22,8 @@ def is_in(li1, li2):
     for i in range(0, len((v1)) - 1):
         if (v1[i] > 0):
             bools.append(v2[i] > 0)
-    return False not in bools
 
+    return False not in bools
 
 def to_str(li):
     values = li.values()
