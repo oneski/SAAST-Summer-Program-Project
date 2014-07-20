@@ -22,7 +22,7 @@ def vignere(ctfilename = "dracula-enc.txt", keyfilename = "dracula-keywords.txt"
 	print keys
 	for i in range(len(keys)):
 		print vignereDecrypter(cypherText[i].strip(), keys[i].strip())
-
+		
 def vignereDecrypter(line, key):
 	return "".join([addChars(line[i], key[i % len(key)]) for i in range(len(line))])
 
