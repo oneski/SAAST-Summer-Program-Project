@@ -90,7 +90,10 @@ def notMain(stringg,filename):
 	invent = LetterInv(stringg)
 
 	iterator(invent,wordList,[]) # Args: What is left of the string that we are trying to decode (still the full thing at this), the list of eligible words, and the list of words currently being built
-	return output
+	result = []
+	for line in output:
+		result.append("".join(line))
+	return result
 
 
 def main():
@@ -103,5 +106,6 @@ main()
 """
 
 [['widespread', 'wrinkliest', 'wildebeest', 'wigwagging'], ['widespread', 'wrinkliest', 'wigwagging', 'wildebeest'], ['widespread', 'wildebeest', 'wrinkliest', 'wigwagging'], ['widespread', 'wildebeest', 'wigwagging', 'wrinkliest'], ['widespread', 'wigwagging', 'wrinkliest', 'wildebeest'], ['widespread', 'wigwagging', 'wildebeest', 'wrinkliest'], ['wrinkliest', 'widespread', 'wildebeest', 'wigwagging'], ['wrinkliest', 'widespread', 'wigwagging', 'wildebeest'], ['wrinkliest', 'wildebeest', 'widespread', 'wigwagging'], ['wrinkliest', 'wildebeest', 'wigwagging', 'widespread'], ['wrinkliest', 'wigwagging', 'widespread', 'wildebeest'], ['wrinkliest', 'wigwagging', 'wildebeest', 'widespread'], ['wildebeest', 'widespread', 'wrinkliest', 'wigwagging'], ['wildebeest', 'widespread', 'wigwagging', 'wrinkliest'], ['wildebeest', 'wrinkliest', 'widespread', 'wigwagging'], ['wildebeest', 'wrinkliest', 'wigwagging', 'widespread'], ['wildebeest', 'wigwagging', 'widespread', 'wrinkliest'], ['wildebeest', 'wigwagging', 'wrinkliest', 'widespread'], ['wigwagging', 'widespread', 'wrinkliest', 'wildebeest'], ['wigwagging', 'widespread', 'wildebeest', 'wrinkliest'], ['wigwagging', 'wrinkliest', 'widespread', 'wildebeest'], ['wigwagging', 'wrinkliest', 'wildebeest', 'widespread'], ['wigwagging', 'wildebeest', 'widespread', 'wrinkliest'], ['wigwagging', 'wildebeest', 'wrinkliest', 'widespread']]
+452657735
 
 """
