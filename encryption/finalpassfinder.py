@@ -18,6 +18,7 @@ def notMain(stringg,filename):
 	        counts = [s.count(chr(c)) for c in range(ord('a'), ord('z') + 1)]
 	        z = zip(list(ascii_lowercase), counts)
 	        self.content = {k : v for k, v in z}
+	        print self.content
 
 	    def subtract(self, li2):
 	        diffs = []
