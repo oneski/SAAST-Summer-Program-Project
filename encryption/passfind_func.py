@@ -33,6 +33,6 @@ def to_str(li):
 
     for i in range(0, len(keys) - 1):
         result += values[i] * str(keys[i])
-    return result
+    return ''.join(sorted(result))
 
-print subtract(create_inventory("hello"), create_inventory("helloworld"))
+print to_str(create_inventory('helloworld'))
