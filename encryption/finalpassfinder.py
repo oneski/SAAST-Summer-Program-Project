@@ -24,7 +24,9 @@ def notMain(stringg,filename):
 	        for i in range(0, len(self.content.values())):
 	            diffs.append(abs(self.content[chr(ord('a') + i )] - li2.content[chr(ord('a') + i)]))
 	        z = zip(list(ascii_lowercase), diffs)
-	        return {k : v for k, v in z}
+	      	output = LetterInv("")
+	      	output.content = {k : v for k, v in z}
+	        return output
 
 	    def is_in(self, li2):
 	    	output = True
@@ -48,7 +50,7 @@ def notMain(stringg,filename):
 		# returns a dictionary mapping each word in words to a letter inventory object
 		output = {}
 		for i in range(len(words)):
-			output[words[i].strip()] = LetterInv(words[i].strip())
+			output[words[i]] = LetterInv(words[i])
 		return output
 
 	def prune_by_inventory(dic, li):
@@ -63,10 +65,9 @@ def notMain(stringg,filename):
 		# returns a dictionary (mapping words to letterinvs) with all of the words that start with "w"
 		return {key : dic[key] for key in dic.keys() if key[0] == "w"}
 
-	def iterator(stringg,objectDic,listBuiltSoFar):
-		print "Calling iterator on", stringg
+	def iterator(invent,objectDic,listBuiltSoFar):
+		print "Calling iterator on " + invent.to_str()
 		global output
-		invent = LetterInv(stringg) # invent is the letter inventory of the word we have built so far
 		if len(objectDic): # if there is still and eligible word (WHEN DO WE CHECK THERE ARE ELIGIBLE WORDS?)
 			print "b"
 			for key in objectDic.keys(): # for each eligible word:
@@ -75,13 +76,12 @@ def notMain(stringg,filename):
 					print "d"
 					tempListBuiltSo = [x for x in listBuiltSoFar]
 					tempListBuiltSo += [str(key)]
-					if not sum(objectDic[key].subtract(invent).values()): # This checks if the word picked finished off the string, doesn't actually remove the letter counts of the added word
+					if not sum(objectDic[key].subtract(invent).content.values()): # This checks if the word picked finished off the string, doesn't actually remove the letter counts of the added word
 						output += [tempListBuiltSo] # add the list of words to the output
-						print "e", output
+						print "e", output, invent.to_str(), listBuiltSoFar
 					else:
 						print "e1"
-						invent.content = invent.subtract(objectDic[key]) # sets the letter inventory of the
-						iterator(invent.to_str(),objectDic,tempListBuiltSo)
+						iterator(invent.subtract(objectDic[key]),objectDic,tempListBuiltSo)
 				else:
 					print "d1"
 					pass
@@ -91,15 +91,16 @@ def notMain(stringg,filename):
 
 	wordlist = []
 	with open(filename) as f:
-		wordlist = f.readlines() 
+		wordlist = [x.lower().strip() for x in f.readlines()]
 	wordList = compute_inventories(wordlist) # This makes wordList into the dictionary of objects
 	#wordList = prune_by_length(prune_by_inventory(prune_by_w(wordList), stringg), 10)
+	invent = LetterInv(stringg)
 
-	iterator(stringg,wordList,[]) # Args: What is left of the string that we are trying to decode (still the full thing at this), the list of eligible words, and the list of words currently being built
+	iterator(invent,wordList,[]) # Args: What is left of the string that we are trying to decode (still the full thing at this), the list of eligible words, and the list of words currently being built
 	return output
 
 
 def main():
-	print notMain("doghousezoo", "wordlist.txt")
+	print notMain("doghousefuckoff", "wordlist.txt")
 
 main()
