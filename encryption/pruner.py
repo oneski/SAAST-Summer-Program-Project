@@ -3,7 +3,7 @@ with open("manualList.txt") as f:
 
 
 f = [x.replace("\n","") for x in f]
-f = [x.lower() for x in f if len(x)== 10]
+f = [x.lower() for x in f if len(x)== 11]
 f = [x for x in f if x.count("a")<3]
 f = [x for x in f if x.count("b")<2]
 f = [x for x in f if x.count("c")==0]

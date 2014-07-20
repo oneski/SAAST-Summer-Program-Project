@@ -66,27 +66,19 @@ def notMain(stringg,filename):
 		return {key : dic[key] for key in dic.keys() if key[0] == "w"}
 
 	def iterator(invent,objectDic,listBuiltSoFar):
-		print "Calling iterator on " + invent.to_str()
 		global output
 		if len(objectDic): # if there is still and eligible word (WHEN DO WE CHECK THERE ARE ELIGIBLE WORDS?)
-			print "b"
 			for key in objectDic.keys(): # for each eligible word:
-				print "c", listBuiltSoFar, key
 				if(objectDic[key].is_in(invent)): # if the eligible word is in the overall inventory 
-					print "d"
 					tempListBuiltSo = [x for x in listBuiltSoFar]
 					tempListBuiltSo += [str(key)]
 					if not sum(objectDic[key].subtract(invent).content.values()): # This checks if the word picked finished off the string, doesn't actually remove the letter counts of the added word
 						output += [tempListBuiltSo] # add the list of words to the output
-						print "e", output, invent.to_str(), listBuiltSoFar
 					else:
-						print "e1"
 						iterator(invent.subtract(objectDic[key]),objectDic,tempListBuiltSo)
 				else:
-					print "d1"
 					pass
 		else:
-			print "b1"
 			pass
 
 	wordlist = []
@@ -101,6 +93,14 @@ def notMain(stringg,filename):
 
 
 def main():
-	print notMain("doghousefuckoff", "wordlist.txt")
+	print notMain("aabdddeeeeeeggggiiiiiikllnnprrsssttwwwww", "manualList2.txt")
 
 main()
+
+
+
+"""
+
+[['widespread', 'wrinkliest', 'wildebeest', 'wigwagging'], ['widespread', 'wrinkliest', 'wigwagging', 'wildebeest'], ['widespread', 'wildebeest', 'wrinkliest', 'wigwagging'], ['widespread', 'wildebeest', 'wigwagging', 'wrinkliest'], ['widespread', 'wigwagging', 'wrinkliest', 'wildebeest'], ['widespread', 'wigwagging', 'wildebeest', 'wrinkliest'], ['wrinkliest', 'widespread', 'wildebeest', 'wigwagging'], ['wrinkliest', 'widespread', 'wigwagging', 'wildebeest'], ['wrinkliest', 'wildebeest', 'widespread', 'wigwagging'], ['wrinkliest', 'wildebeest', 'wigwagging', 'widespread'], ['wrinkliest', 'wigwagging', 'widespread', 'wildebeest'], ['wrinkliest', 'wigwagging', 'wildebeest', 'widespread'], ['wildebeest', 'widespread', 'wrinkliest', 'wigwagging'], ['wildebeest', 'widespread', 'wigwagging', 'wrinkliest'], ['wildebeest', 'wrinkliest', 'widespread', 'wigwagging'], ['wildebeest', 'wrinkliest', 'wigwagging', 'widespread'], ['wildebeest', 'wigwagging', 'widespread', 'wrinkliest'], ['wildebeest', 'wigwagging', 'wrinkliest', 'widespread'], ['wigwagging', 'widespread', 'wrinkliest', 'wildebeest'], ['wigwagging', 'widespread', 'wildebeest', 'wrinkliest'], ['wigwagging', 'wrinkliest', 'widespread', 'wildebeest'], ['wigwagging', 'wrinkliest', 'wildebeest', 'widespread'], ['wigwagging', 'wildebeest', 'widespread', 'wrinkliest'], ['wigwagging', 'wildebeest', 'wrinkliest', 'widespread']]
+
+"""
