@@ -40,7 +40,7 @@ def notMain(stringg,filename):
 	        values = self.content.values()
 	        keys = self.content.keys()
 	        result = ""
-	        for i in range(0, len(keys) - 1):
+	        for i in range(0, len(keys)):
 	            result += values[i] * str(keys[i])
 	        return ''.join(sorted(result))
 
@@ -64,21 +64,29 @@ def notMain(stringg,filename):
 		return {key : dic[key] for key in dic.keys() if key[0] == "w"}
 
 	def iterator(stringg,objectDic,listBuiltSoFar):
+		print "a", stringg
 		global output
 		invent = LetterInv(stringg) # invent is the letter inventory of the word we have built so far
 		if len(objectDic): # if there is still and eligible word (WHEN DO WE CHECK THERE ARE ELIGIBLE WORDS?)
+			print "b"
 			for key in objectDic.keys(): # for each eligible word:
+				print "c", listBuiltSoFar, key
 				if(objectDic[key].is_in(invent)): # if the eligible word is in the overall inventory 
+					print "d"
 					tempListBuiltSo = [x for x in listBuiltSoFar]
 					tempListBuiltSo += [str(key)]
 					if not sum(objectDic[key].subtract(invent).values()): # This checks if the word picked finished off the string, doesn't actually remove the letter counts of the added word
 						output += [tempListBuiltSo] # add the list of words to the output
+						print "e", output
 					else:
+						print "e1"
 						invent.content = invent.subtract(objectDic[key]) # sets the letter inventory of the
 						iterator(invent.to_str(),objectDic,tempListBuiltSo)
 				else:
+					print "d1"
 					pass
 		else:
+			print "b1"
 			pass
 
 	wordlist = []
