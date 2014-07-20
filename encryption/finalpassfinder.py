@@ -64,7 +64,7 @@ def notMain(stringg,filename):
 		return {key : dic[key] for key in dic.keys() if key[0] == "w"}
 
 	def iterator(stringg,objectDic,listBuiltSoFar):
-		print "a", stringg
+		print "Calling iterator on", stringg
 		global output
 		invent = LetterInv(stringg) # invent is the letter inventory of the word we have built so far
 		if len(objectDic): # if there is still and eligible word (WHEN DO WE CHECK THERE ARE ELIGIBLE WORDS?)
