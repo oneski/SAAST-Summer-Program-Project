@@ -37,14 +37,18 @@ def onetimepad(ciphertext, key):
 
 def subCipher(ciphertext, filename = "subst-table-ex.txt"):
 	subDict = tbl(filename)
-	return "".join([subDict[char] for char in ciphertext])
+
+	return "".join( [subDict[char] for char in ciphertext] )
 
 def tbl(filename):
 	output = {}
+
 	with open(filename) as f:
 		lines = f.readlines()
+
 	for i in range(26):
 		output[chr(i + 97)] = lines[i].strip()
+        
 	return output
 
 print subCipher("edddaikglyedh\
