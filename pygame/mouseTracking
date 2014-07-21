@@ -1,0 +1,35 @@
+import pygame, sys
+from pygame.locals import *
+
+pygame.init()
+
+def main():
+	size = width, height = 320, 240
+	screen = pygame.display.set_mode(size)
+	mousex, mousey = 0, 0
+
+	fpsClock = pygame.time.Clock()
+
+	ball = pygame.image.load("ball.gif")
+	ballrect = ball.get_rect()
+
+	fontObj = pygame.font.Font("freesansbold.ttf", 20)
+
+	for i in range(500):
+		for event in pygame.event.get():
+				if event.type == QUIT: 
+					sys.exit()
+				elif event.type == MOUSEMOTION:
+					mousex, mousey = event.pos
+
+		msgObj = fontObj.render(str(mousex) + ", " + str(mousey), False, pygame.Color(0, 255, 255))
+		msgRect = msgObj.get_rect()
+		msgRect.centerx, msgRect.centery = width / 2, height / 2
+		surface.blit(msgObj, msgRect)
+
+		screen.blit(background, (0, 0))
+		pygame.display.update()
+
+		fpsClock.tick(30)
+
+	sys.exit()
