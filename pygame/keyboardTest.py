@@ -21,8 +21,9 @@ while True:
    press=pygame.key.get_pressed()
    for i in xrange(0,len(press)): 
     if press[i]==1:
-     name=pygame.key.name(i) 
-     text=f1.render(name,True,(0,0,0))
-     screen.blit(text,(100,a))
-     a=a+100
+      print i
+      name=pygame.key.name(i) 
+      text=f1.render(name,True,(0,0,0))
+      screen.blit(text,(100,a))
+      a=a+100
    pygame.display.update()
