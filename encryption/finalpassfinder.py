@@ -69,6 +69,7 @@ def notMain(stringg,filename):
 		global output
 		if len(objectDic): # if there is still and eligible word (WHEN DO WE CHECK THERE ARE ELIGIBLE WORDS?)
 			for key in objectDic.keys(): # for each eligible word:
+				print invent, objectDic[key], listBuiltSoFar
 				if(objectDic[key].is_in(invent)): # if the eligible word is in the overall inventory 
 					tempListBuiltSo = [x for x in listBuiltSoFar]
 					tempListBuiltSo += [str(key)]
@@ -93,7 +94,7 @@ def notMain(stringg,filename):
 
 
 def main():
-	print notMain("aabdddeeeeeeggggiiiiiikllnnprrsssttwwwww", "manualList2.txt")
+	print notMain("doghousezoo", "wordlist.txt")
 
 main()
 
