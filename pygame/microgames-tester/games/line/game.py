@@ -27,7 +27,7 @@ def title():
     pass
 
 def thumbnail():
-    return os.path.join("games", "evade", "snowguy.png")
+    return os.path.join("games", "line", "snowguy.png")
     pass
 
 def hint():
@@ -60,7 +60,7 @@ ICICLE_WIDTH = 50
 class e_icicle(Sprite):
     def __init__(self, y):
         Sprite.__init__(self)
-        imgpath = os.path.join("games", "evade", "damage.png")
+        imgpath = os.path.join("games", "line", "damage.png")
         self.image, self.rect = _load_image(imgpath, 0, 0)
         #self.rect.bottom = y
         #self.rect.left = randint(0, locals.WIDTH / 3 - ICICLE_WIDTH)
@@ -85,7 +85,7 @@ class e_icicle(Sprite):
 class eskimo(Sprite):
     def __init__(self):
         Sprite.__init__(self)
-        imgpath = os.path.join("games", "evade", "snowguy.png")
+        imgpath = os.path.join("games", "line", "snowguy.png")
         self.image, self.rect = _load_image(imgpath, 60, 60)
         self.rect.bottom = 120
         self.rect.left = 700
@@ -105,7 +105,7 @@ class evade(Microgame):
         self.sprites = Group(self.e_eskimo, *self.e_icicles)
 
     def start(self):
-        music.load(os.path.join("games", "evade", "alt_song.wav"))
+        music.load(os.path.join("games", "line", "alt_song.wav"))
         music.play()
 
     def stop(self):
@@ -130,7 +130,7 @@ class evade(Microgame):
 
     def render(self, surface):
         surface.fill((0, 0, 0))
-        imgpathh = os.path.join("games", "evade", "tile.png")
+        imgpathh = os.path.join("games", "line", "tile.png")
         test_image = pygame.image.load(imgpathh) 
         surface.blit(test_image,(0,0))
         self.sprites.draw(surface)
