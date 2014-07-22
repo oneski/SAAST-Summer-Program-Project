@@ -72,7 +72,6 @@ class e_icicle(Sprite):
         if self.rect.top > locals.HEIGHT:
             asdf = randint(1, 20)
             if asdf == 1:
-                print asdf
                 self.rect.top = 0
                 self.rect.left = randint(0, locals.WIDTH / 3 - ICICLE_WIDTH)
                 self.velocity = 0

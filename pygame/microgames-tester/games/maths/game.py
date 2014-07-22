@@ -75,9 +75,9 @@ class rotatingOperation(Sprite):
         Sprite.__init__(self)
         #randomly choose # btw 1-10
         self.operation = "add"
-        imgpath = os.path.join("games","maths",self.operation + ".png"))
+        imgpath = os.path.join("games","maths",self.operation + ".png")
         self.image, self.rect = _load_image(imgpath,300,100)
-        self.rect.x, self.rect.y = int(2.0 * locals.WIDTH / 3), s3.0 * locals.HEIGHT / 4
+        #self.rect.x, self.rect.y = int(2.0 * locals.WIDTH / 3), s3.0 * locals.HEIGHT / 4
         #bounding box
     def update(self):
         pass

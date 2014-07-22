@@ -12,7 +12,7 @@ class Microgame():
 
     def __init__(self):
         self.finished = False
-        self.winner = False
+        self.winner = True
 
     def start(self):
         '''
@@ -33,12 +33,13 @@ class Microgame():
         '''
         raise NotImplementedError('Microgame.stop')
 
-    def update(self):
+    def update(self, events):
         '''
         Updates this microgame.
 
-        update() is called on every game tick in main and should handle all user
-        input for that tick as well as update the microgame's own model.
+        update(events) is called on every game tick in main and should handle
+        all user input for that tick as well as update the microgame's own
+        model.
         '''
         raise NotImplementedError('Microgame.update')
 

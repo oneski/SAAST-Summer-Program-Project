@@ -66,7 +66,7 @@ class Tester(object):
     def _transition_in(self):
         ''' Transitions into a game from the transition screen.'''
         self.game = self._get_current_microgame().make_game()
-        self.timeSinceLast = 0.0
+        self.timeSinceLast = get_ticks()
         self.game.start()
 
     def _process_events(self, events):
@@ -84,6 +84,9 @@ class Tester(object):
                 if not self.game.winner:
                     self.lives = self.lives - 1
                 self._transition_out()
+            elif get_ticks() > self.timeSinceLast +  \
+                               self.game.get_timelimit() * 1000:
+                self.game.finished = True
         else:
             if get_ticks() > self.timeSinceLast + WAIT_PERIOD:
                 self._transition_in()
@@ -91,6 +94,11 @@ class Tester(object):
     def render(self):
         if self.game:
             self.game.render(self.surface)
+            elapsed = self.game.get_timelimit() *  \
+                      1000 - (get_ticks() - self.timeSinceLast)
+            elapsed = 0.0 if elapsed < 0.0 else elapsed / 1000.0
+            self.surface.blit(self.font.render('{0:.2f}'.format(elapsed), True,
+                              Color(255, 255, 255)), (0, 0))
         else:
             self.surface.fill(Color(0, 0, 0))
             elapsed = WAIT_PERIOD - (get_ticks() - self.timeSinceLast)
