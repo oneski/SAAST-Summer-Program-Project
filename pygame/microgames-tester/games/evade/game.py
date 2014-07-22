@@ -27,7 +27,7 @@ def title():
     pass
 
 def thumbnail():
-    return #Your mother
+    return os.path.join("games", "evade", "snowguy.png")
     pass
 
 def hint():
@@ -55,56 +55,75 @@ def _load_image(name, x, y):
 
 ##### MODEL CLASSES ###########################################################
 
+ICICLE_WIDTH = 50
+
 class e_icicle(Sprite):
-    def __init__(self):
+    def __init__(self, y):
         Sprite.__init__(self)
-        #self.image = pygame.image.load('games/koala/koala.jpg').convert_alpha()
-        self.rect  = self.image.get_rect()
-        self.rect.bottom = 0
-        self.rect.left = randint(0, 330)
-        self.velocity = 0.0
+        imgpath = os.path.join("games", "evade", "damage.png")
+        self.image, self.rect = _load_image(imgpath, 0, 0)
+        self.rect.bottom = y
+        self.rect.left = randint(0, locals.WIDTH / 3 - ICICLE_WIDTH)
+        self.velocity = 1
 
     def update(self):
-        y += self.velocity
-        self.rect.y = int(y)
-        self.velocity += .3
+        self.rect.y += self.velocity
+        self.velocity += 1
+        if self.rect.top > locals.HEIGHT:
+            asdf = randint(1, 20)
+            if asdf == 1:
+                print asdf
+                self.rect.top = 0
+                self.rect.left = randint(0, locals.WIDTH / 3 - ICICLE_WIDTH)
+                self.velocity = 0
 
-class e_eskimo(Sprite):
+class eskimo(Sprite):
     def __init__(self):
         Sprite.__init__(self)
-        self.image = pygame.image.load('games/koala/koala.jpg').convert_alpha()
-        self.rect = self.image.get_rect()
-        #2 lines above here might not work
+        imgpath = os.path.join("games", "evade", "snowguy.png")
+        self.image, self.rect = _load_image(imgpath, 60, 60)
         self.rect.bottom = 700
         self.rect.left = 120
-        self.velocity = 0
+        #self.velocity = 0
 
     def update(self):
-        self.rect.x += self.velocity 
+        #self.rect.x += self.velocity
+        pass
 
 ##### MICROGAME CLASS #########################################################
 
 class evade(Microgame):
     def __init__(self):
         Microgame.__init__(self)
-        self.e_icicles = []
+        self.e_icicles = [e_icicle(0), e_icicle(locals.HEIGHT + 70)]
         self.e_eskimo = eskimo()
-        self.sprites = Group(self.e_eskimo, self.)
+        self.sprites = Group(self.e_eskimo, *self.e_icicles)
 
     def start(self):
-        # TODO: Startup code here
+        music.load(os.path.join("games", "evade", "alt_song.mp3"))
+        music.play()
 
     def stop(self):
-        # TODO: Clean-up code here
+        pass
 
     def update(self, events):
         self.sprites.update()
-        
-
-
+        keys = pygame.key.get_pressed()
+        if keys[K_q]:
+            self.lose()
+        elif keys[K_RIGHT] and keys[K_LEFT]:
+            pass
+        elif keys[K_LEFT]:
+            self.e_eskimo.rect.x = max(self.e_eskimo.rect.x - 15, 0)
+        elif keys[K_RIGHT]:
+            self.e_eskimo.rect.x = min(locals.WIDTH  / 3, self.e_eskimo.rect.x + 15)
+        for icicle in self.e_icicles:
+            if self.e_eskimo.rect.colliderect(icicle.rect):
+                self.lose()
 
     def render(self, surface):
-        self.sprites.draw()
+        surface.fill((0, 0, 0))
+        self.sprites.draw(surface)
 
     def get_timelimit(self):
         return 15
