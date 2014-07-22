@@ -100,22 +100,22 @@ class evade(Microgame):
         self.sprites = Group(self.e_eskimo, *self.e_icicles)
 
     def start(self):
-        music.load(os.path.join("games", "evade", "alt_song.mp3"))
+        music.load(os.path.join("games", "evade", "alt_song.wav"))
         music.play()
 
     def stop(self):
-        pass
+        self.lose()
 
     def update(self, events):
         self.sprites.update()
         keys = pygame.key.get_pressed()
         if keys[K_q]:
-            self.lose()
-        elif keys[K_RIGHT] and keys[K_LEFT]:
+            self.win()
+        elif (keys[K_RIGHT] or keys[K_d]) and (keys[K_LEFT] or keys[K_a]):
             pass
-        elif keys[K_LEFT]:
+        elif keys[K_LEFT] or keys[K_a]:
             self.e_eskimo.rect.x = max(self.e_eskimo.rect.x - 15, 0)
-        elif keys[K_RIGHT]:
+        elif keys[K_RIGHT] or keys[K_d]:
             self.e_eskimo.rect.x = min(locals.WIDTH  / 3, self.e_eskimo.rect.x + 15)
         for icicle in self.e_icicles:
             if self.e_eskimo.rect.colliderect(icicle.rect):
