@@ -196,7 +196,7 @@ class evade(Microgame):
     def __init__(self):
         Microgame.__init__(self)
         #line
-        self.e_icicles = [e_icicle()] #e_icicle(), e_icicle()]
+        self.e_icicles = [e_icicle(), e_icicle()]
         self.e_eskimo = eskimo()
         self.sprites = Group(self.e_eskimo, *self.e_icicles)
 
@@ -207,15 +207,15 @@ class evade(Microgame):
         self.sub1 = rotatingNumber(0.5, randint(3, 9))
         self.sub2 = rotatingNumber(5.0 / 6.0, randint(0, self.sub1.num))
         self.subans = self.sub1.num - self.sub2.num
-        self.mod2 = rotatingNumber(5.0 / 6.0, randint(1, 9))
-        self.mod1 = rotatingNumber(0.5, randint(0, 9))
+        self.mod2 = rotatingNumber(5.0 / 6.0, randint(2, 4))
+        self.mod1 = rotatingNumber(0.5, randint(self.mod2.num + 1, 9))
         self.modans = self.mod1.num % self.mod2.num
-        self.mod_2 = rotatingNumber(5.0 / 6.0, randint(1, 9))
-        self.mod_1 = rotatingNumber(0.5, randint(0, 9))
-        self.mod_ans = self.mod1.num % self.mod2.num
-        self.mod__2 = rotatingNumber(5.0 / 6.0, randint(1, 9))
-        self.mod__1 = rotatingNumber(0.5, randint(0, 9))
-        self.mod__ans = self.mod1.num % self.mod2.num
+        self.mod_2 = rotatingNumber(5.0 / 6.0, randint(2, 4))
+        self.mod_1 = rotatingNumber(0.5, randint(self.mod_2.num + 1, 9))
+        self.mod_ans = self.mod_1.num % self.mod_2.num
+        self.mod__2 = rotatingNumber(5.0 / 6.0, randint(2, 4))
+        self.mod__1 = rotatingNumber(0.5, randint(self.mod_2.num + 1, 9))
+        self.mod__ans = self.mod__1.num % self.mod__2.num
         self.add = rotatingOperation(int(2.0 * locals.WIDTH / 3), "add")
         self.sub = rotatingOperation(int(2.0 * locals.WIDTH / 3), "sub")
         self.mod = rotatingOperation(int(2.0 * locals.WIDTH / 3), "mod")
@@ -228,7 +228,7 @@ class evade(Microgame):
 
         #evade
 
-        self.ee_icicles = [ee_icicle(0)] #ee_icicle(locals.HEIGHT + 70), ee_icicle(100)]
+        self.ee_icicles = [ee_icicle(0) ,ee_icicle(locals.HEIGHT + 70), ee_icicle(100)]
         self.ee_eskimo = eeskimo()
         self.esprites = Group(self.ee_eskimo, *self.ee_icicles)
 
