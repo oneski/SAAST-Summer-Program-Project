@@ -64,7 +64,7 @@ class rotatingNumber(Sprite):
         self.num = num
         imgpath = os.path.join("games","maths",str(str(num)+".png"))
         self.image, self.rect = _load_image(imgpath,300,100)
-        self.rect.x, self.rect.y = int(x * locals.WIDTH), int(3.0 * locals.HEIGHT / 4)
+        self.rect.centerx, self.rect.centery = int(x * locals.WIDTH), int(3.0 * locals.HEIGHT / 4)
     def update(self):
         pass
 
@@ -74,7 +74,7 @@ class rotatingOperation(Sprite):
         self.operation = operation
         imgpath = os.path.join("games","maths",self.operation + ".png")
         self.image, self.rect = _load_image(imgpath,300,100)
-        self.rect.x, self.rect.y = x, int(3.0 * locals.HEIGHT / 4)
+        self.rect.centerx, self.rect.centery = x, int(3.0 * locals.HEIGHT / 4)
     def update(self):
         pass
 
@@ -104,15 +104,14 @@ class MATHS(Microgame):
 
     def start(self):
         self.answer = self.addans
+        print self.answer, self.stage
         pass
 
     def stop(self):
-        if self.stage != 3:
-            self.lose()
         pass
 
     def update(self, events):
-        for event in pygame.event.get():
+        for event in events:
             if event.type == KEYDOWN and event.key == K_q:
                 self.lose()
             if event.type == KEYDOWN and event.key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
@@ -121,9 +120,11 @@ class MATHS(Microgame):
                     if self.stage == 0:
                         self.answer = self.subans
                         self.stage = 1
+                        print self.answer, self.stage
                     elif self.stage == 1:
                         self.answer = self.modans
                         self.stage = 2
+                        print self.answer, self.stage
                     elif self.stage == 2:
                         self.stage = 3
                         self.answer = -1
@@ -134,6 +135,9 @@ class MATHS(Microgame):
 
     def render(self, surface):
         surface.fill((0, 0, 0))
+        imgpathhhh = os.path.join("games", "maths", "mathBG.png")
+        test_imageee = pygame.image.load(imgpathhhh)
+        surface.blit(test_imageee,(377,768 / 2))
         if self.stage == 0:
             self.sprites1.draw(surface)
         elif self.stage == 1:
