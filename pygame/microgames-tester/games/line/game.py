@@ -31,7 +31,7 @@ def thumbnail():
     pass
 
 def hint():
-    return "LINE!"
+    return "Don't let the ember get \n hit!"
     pass
 
 ################################################################################
@@ -136,7 +136,26 @@ class evade(Microgame):
 
     def update(self, events):
         self.sprites.update()
-        keys = pygame.key.get_pressed()
+        for event in events:
+            if event.type == KEYUP and (event.key == K_UP or event.key == K_w) and (event.key == K_DOWN or event.key == K_s):
+                pass
+            elif event.type == KEYUP and event.key == K_q:
+                self.win()
+            elif event.type == KEYUP and (event.key == K_UP or event.key == K_w):
+                if(self.e_eskimo.rect.centery == 2*locals.HEIGHT/8):
+                    self.e_eskimo.rect.centery = locals.HEIGHT/8
+                elif(self.e_eskimo.rect.centery == locals.HEIGHT/8):
+                    self.e_eskimo.rect.centery = locals.HEIGHT/8
+                elif(self.e_eskimo.rect.centery == 3*locals.HEIGHT/8):
+                    self.e_eskimo.rect.centery = 2*locals.HEIGHT/8
+            elif event.type == KEYUP and (event.key == K_DOWN or event.key == K_s):
+                if(self.e_eskimo.rect.centery == 2*locals.HEIGHT/8):
+                    self.e_eskimo.rect.centery = 3*locals.HEIGHT/8
+                elif(self.e_eskimo.rect.centery == locals.HEIGHT/8):
+                    self.e_eskimo.rect.centery = 2*locals.HEIGHT/8
+                elif(self.e_eskimo.rect.centery == 3*locals.HEIGHT/8):
+                    self.e_eskimo.rect.centery = 3*locals.HEIGHT/8
+        """keys = pygame.key.get_pressed()
         if keys[K_q]:
             self.win()
         elif (keys[K_UP] or keys[K_w]) and (keys[K_DOWN] or keys[K_s]):
@@ -155,6 +174,7 @@ class evade(Microgame):
                 self.e_eskimo.rect.centery = 2*locals.HEIGHT/8
             elif(self.e_eskimo.rect.centery == 3*locals.HEIGHT/8):
                 self.e_eskimo.rect.centery = 3*locals.HEIGHT/8
+        """
         for icicle in self.e_icicles:
             if self.e_eskimo.rect.colliderect(icicle.rect):
                 music.stop()
