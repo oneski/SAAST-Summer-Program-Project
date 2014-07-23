@@ -23,11 +23,11 @@ def make_game():
     pass
 
 def title():
-    return "Eskimo Game"
+    return "Ember Defense"
     pass
 
 def thumbnail():
-    return os.path.join("games", "line", "snowguy.png")
+    return os.path.join("games", "line", "emberHD.png")
     pass
 
 def hint():
@@ -55,17 +55,26 @@ def _load_image(name, x, y):
 
 ##### MODEL CLASSES ###########################################################
 
-ICICLE_WIDTH = 50
 
 class e_icicle(Sprite):
-    def __init__(self, y):
+    def __init__(self):
         Sprite.__init__(self)
-        imgpath = os.path.join("games", "line", "damage.png")
+        imgRand = randint(0,1)
+        if(imgRand):
+            imgpath = os.path.join("games", "line", "retro.png")
+        else:
+            imgpath = os.path.join("games","line","syspref.png")
         self.image, self.rect = _load_image(imgpath, 0, 0)
         #self.rect.bottom = y
         #self.rect.left = randint(0, locals.WIDTH / 3 - ICICLE_WIDTH)
-        self.rect.left = y
-        self.rect.top = randint(0, locals.WIDTH / 3 - ICICLE_WIDTH)
+        self.rect.left = 0
+        posRand = randint(0,2)
+        if posRand == 0:
+            self.rect.centery = locals.HEIGHT/8
+        elif posRand == 1:
+            self.rect.centery = 2*locals.HEIGHT/8
+        else:
+            self.rect.centery = 3*locals.HEIGHT/8
 
         self.velocity = 1
 
@@ -73,21 +82,34 @@ class e_icicle(Sprite):
         #self.rect.y += self.velocity
         self.rect.x += self.velocity
         self.velocity += 1
-        if self.rect.right > locals.WIDTH/3:
+        if self.rect.right > locals.WIDTH:
             asdf = randint(1, 20)
             if asdf == 1:
                 #self.rect.top = 0
                 #self.rect.left = randint(0, locals.WIDTH / 3 - ICICLE_WIDTH)
+                imgRand = randint(0,1)
+                if(imgRand):
+                    imgpath = os.path.join("games", "line", "retro.png")
+                else:
+                    imgpath = os.path.join("games","line","syspref.png")
+                self.image, self.rect = _load_image(imgpath, 0, 0)
+
                 self.rect.left = 0
-                self.rect.top = randint(0, locals.WIDTH / 3 - ICICLE_WIDTH)
+                posRand = randint(0,2)
+                if posRand == 0:
+                    self.rect.centery = locals.HEIGHT/8
+                elif posRand == 1:
+                    self.rect.centery = 2*locals.HEIGHT/8
+                else:
+                    self.rect.centery = 3*locals.HEIGHT/8
                 self.velocity = 0
 
 class eskimo(Sprite):
     def __init__(self):
         Sprite.__init__(self)
-        imgpath = os.path.join("games", "line", "snowguy.png")
+        imgpath = os.path.join("games", "line", "fireguy.png")
         self.image, self.rect = _load_image(imgpath, 60, 60)
-        self.rect.bottom = randint(1,3)*(locals.HEIGHT/8)
+        self.rect.centery = 2*(locals.HEIGHT/8)
         self.rect.left = 2*locals.WIDTH/3
         #self.velocity = 0
 
@@ -100,7 +122,7 @@ class eskimo(Sprite):
 class evade(Microgame):
     def __init__(self):
         Microgame.__init__(self)
-        self.e_icicles = [e_icicle(0), e_icicle(locals.HEIGHT + 70)]
+        self.e_icicles = [e_icicle(), e_icicle()]
         self.e_eskimo = eskimo()
         self.sprites = Group(self.e_eskimo, *self.e_icicles)
 
@@ -120,9 +142,19 @@ class evade(Microgame):
         elif (keys[K_UP] or keys[K_w]) and (keys[K_DOWN] or keys[K_s]):
             pass
         elif keys[K_UP] or keys[K_w]:
-            self.e_eskimo.rect.x = max(self.e_eskimo.rect.x - 15, locals.WIDTH/3+50)
+            if(self.e_eskimo.rect.centery == 2*locals.HEIGHT/8):
+                self.e_eskimo.rect.centery = locals.HEIGHT/8
+            elif(self.e_eskimo.rect.centery == locals.HEIGHT/8):
+                self.e_eskimo.rect.centery = locals.HEIGHT/8
+            elif(self.e_eskimo.rect.centery == 3*locals.HEIGHT/8):
+                self.e_eskimo.rect.centery = 2*locals.HEIGHT/8
         elif keys[K_DOWN] or keys[K_s]:
-            self.e_eskimo.rect.x = min(locals.WIDTH-70, self.e_eskimo.rect.x + 15)
+            if(self.e_eskimo.rect.centery == 2*locals.HEIGHT/8):
+                self.e_eskimo.rect.centery = 3*locals.HEIGHT/8
+            elif(self.e_eskimo.rect.centery == locals.HEIGHT/8):
+                self.e_eskimo.rect.centery = 2*locals.HEIGHT/8
+            elif(self.e_eskimo.rect.centery == 3*locals.HEIGHT/8):
+                self.e_eskimo.rect.centery = 3*locals.HEIGHT/8
         for icicle in self.e_icicles:
             if self.e_eskimo.rect.colliderect(icicle.rect):
                 music.stop()
@@ -133,6 +165,9 @@ class evade(Microgame):
         imgpathh = os.path.join("games", "line", "tile.png")
         test_image = pygame.image.load(imgpathh) 
         surface.blit(test_image,(0,0))
+        imgpathhh = os.path.join("games", "line", "linesBG.png")
+        test_imagee = pygame.image.load(imgpathhh)
+        surface.blit(test_imagee,(377,0))
         self.sprites.draw(surface)
 
     def get_timelimit(self):
