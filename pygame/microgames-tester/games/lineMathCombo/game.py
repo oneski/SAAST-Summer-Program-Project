@@ -169,13 +169,6 @@ class eskimo(Sprite):
         #self.rect.x += self.velocity
         pass
 
-
-
-
-
-
-
-
 #maths
 class rotatingNumber(Sprite):
     def __init__(self, x, num):
@@ -348,7 +341,10 @@ class evade(Microgame):
             self.sprites2.draw(surface)
         elif self.stage == 2:
             self.sprites3.draw(surface)
-
+        elif self.stage == 3:
+            imgpathhhhhh = os.path.join("games", "lineMathCombo", "finshed.png")
+            test_imageeeee = pygame.image.load(imgpathhhhhh)
+            surface.blit(test_imageeeee,(int(2.0 * locals.WIDTH / 3) - 213, int(3.0 * locals.HEIGHT / 4) - 27))
 
         #evade
         imgpathhhhh = os.path.join("games", "lineMathCombo", "tile.png")
@@ -360,24 +356,3 @@ class evade(Microgame):
 
     def get_timelimit(self):
         return 15
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
