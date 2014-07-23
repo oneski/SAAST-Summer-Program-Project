@@ -87,8 +87,8 @@ class eskimo(Sprite):
         Sprite.__init__(self)
         imgpath = os.path.join("games", "line", "snowguy.png")
         self.image, self.rect = _load_image(imgpath, 60, 60)
-        self.rect.bottom = 120
-        self.rect.left = 700
+        self.rect.bottom = randint(1,3)*(locals.HEIGHT/8)
+        self.rect.left = 2*locals.WIDTH/3
         #self.velocity = 0
 
     def update(self):
@@ -120,9 +120,9 @@ class evade(Microgame):
         elif (keys[K_UP] or keys[K_w]) and (keys[K_DOWN] or keys[K_s]):
             pass
         elif keys[K_UP] or keys[K_w]:
-            self.e_eskimo.rect.x = max(self.e_eskimo.rect.x - 15, 0)
+            self.e_eskimo.rect.x = max(self.e_eskimo.rect.x - 15, locals.WIDTH/3+50)
         elif keys[K_DOWN] or keys[K_s]:
-            self.e_eskimo.rect.x = min((locals.WIDTH  / 3)-24, self.e_eskimo.rect.x + 15)
+            self.e_eskimo.rect.x = min(locals.WIDTH-70, self.e_eskimo.rect.x + 15)
         for icicle in self.e_icicles:
             if self.e_eskimo.rect.colliderect(icicle.rect):
                 music.stop()

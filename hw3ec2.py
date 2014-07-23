@@ -62,20 +62,20 @@ output = []
 return [[1,2,3],[1,3,2]...[3,2,1]]
 
 """
-#FINAL VERSION
+#FINAL VERSION  
 def permutate(inputt):
 	output = []
 	def iterate(listBuiltSoFar, leftoverInput):
 		if len(leftoverInput) == 1:
 			listBuiltSoFar.append(leftoverInput[0])
-			output.append(listBuiltSoFar)
-		else:	
+			output.append(listBuiltSoFar) 
+		else:	 
 			for i in range(len(leftoverInput)):
-				tempLeftover = [x for x in leftoverInput]
-				tempLeftover.pop(i)
-				tempListBuilt = [x for x in listBuiltSoFar]
-				tempListBuilt.append(leftoverInput[i])
-				iterate(tempListBuilt, tempLeftover)
-	iterate([], inputt)
+				tempLeftover = [x for x in leftoverInput] 
+				tempLeftover.pop(i) 
+				tempListBuilt = [x for x in listBuiltSoFar] 
+				tempListBuilt.append(leftoverInput[i]) 
+				iterate(tempListBuilt, tempLeftover) 
+	iterate([], inputt) 
 	return output
 print permutate(range(5))
