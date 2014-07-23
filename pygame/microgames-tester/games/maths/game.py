@@ -81,8 +81,7 @@ class rotatingOperation(Sprite):
         #self.rect.x, self.rect.y = int(2.0 * locals.WIDTH / 3), s3.0 * locals.HEIGHT / 4
         #bounding box
     def update(self):
-        imgpath = os.path.join("games","maths",str(str(self.num)+".png"))
-        self.image, self.rect = _load_image(imgpath,300,100)
+        self.image = os.path.join("games","maths",str(str(self.num)+".png")\)
 
 ##### MICROGAME CLASS #########################################################
 
