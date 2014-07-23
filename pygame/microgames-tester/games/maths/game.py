@@ -59,29 +59,24 @@ def _load_image(name, x, y):
 # TODO: put your Sprite classes here
 
 class rotatingNumber(Sprite):
-    def __init__(self, x):
+    def __init__(self, x, num):
         Sprite.__init__(self)
-        #randomly choose # btw 1-10
-        self.num = 1
-        imgpath = os.path.join("games","maths",str(str(self.num)+".png"))
+        self.num = num
+        imgpath = os.path.join("games","maths",str(str(num)+".png"))
         self.image, self.rect = _load_image(imgpath,300,100)
         self.rect.x, self.rect.y = int(x * locals.WIDTH), int(3.0 * locals.HEIGHT / 4)
-        #bounding box
     def update(self):
-        imgpath = os.path.join("games","maths",str(str(self.num)+".png"))
-        self.image, self.rect = _load_image(imgpath,300,100)
+        pass
 
 class rotatingOperation(Sprite):
-    def __init__(self):
+    def __init__(self, x, operation):
         Sprite.__init__(self)
-        #randomly choose # btw 1-10
-        self.operation = "1"
+        self.operation = operation
         imgpath = os.path.join("games","maths",self.operation + ".png")
         self.image, self.rect = _load_image(imgpath,300,100)
-        #self.rect.x, self.rect.y = int(2.0 * locals.WIDTH / 3), s3.0 * locals.HEIGHT / 4
-        #bounding box
+        self.rect.x, self.rect.y = x, int(3.0 * locals.HEIGHT / 4)
     def update(self):
-        self.image = os.path.join("games","maths",str(str(self.num)+".png")\)
+        pass
 
 ##### MICROGAME CLASS #########################################################
 
@@ -90,52 +85,61 @@ class rotatingOperation(Sprite):
 class MATHS(Microgame):
     def __init__(self):
         Microgame.__init__(self)
-        self.numb1 = rotatingNumber(0.5)
-        self.numb2 = rotatingNumber(5.0 / 6)
-        self.op = rotatingOperation()
-        self.sprites = Group(self.numb1,self.numb2,self.op)
-        self.answer = 0
-        self.time = 0
+        self.addans = randint(3, 9)
+        self.add1 = rotatingNumber(0.5, randint(0, self.addans))
+        self.add2 = rotatingNumber(5.0 / 6.0, self.addans - self.add1.num)
+        self.sub1 = rotatingNumber(0.5, randint(3, 9))
+        self.sub2 = rotatingNumber(5.0 / 6.0, randint(0, self.sub1.num))
+        self.subans = self.sub1.num - self.sub2.num
+        self.mod2 = rotatingNumber(5.0 / 6.0, randint(2, 4))
+        self.mod1 = rotatingNumber(0.5, randint(self.mod2.num + 1, 9))
+        self.modans = self.mod1.num % self.mod2.num
+        self.add = rotatingOperation(int(2.0 * locals.WIDTH / 3), "add")
+        self.sub = rotatingOperation(int(2.0 * locals.WIDTH / 3), "sub")
+        self.mod = rotatingOperation(int(2.0 * locals.WIDTH / 3), "mod")
+        self.stage = 0
+        self.sprites1 = Group(self.add1, self.add2, self.add)
+        self.sprites2 = Group(self.sub1, self.sub2, self.sub)
+        self.sprites3 = Group(self.mod1, self.mod2, self.mod)
 
     def start(self):
-        self.answer = randint(3, 9)
-        self.numb2.num = randint(0, self.answer)
-        self.numb1.num = self.answer - self.numb2.num
-        print self.answer
+        self.answer = self.addans
         pass
 
     def stop(self):
-        # TODO: Clean-up code here
+        if self.stage != 3:
+            self.lose()
         pass
 
     def update(self, events):
-        self.time += 1
         for event in pygame.event.get():
+            if event.type == KEYDOWN and event.key == K_q:
+                self.lose()
             if event.type == KEYDOWN and event.key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
                 dictt = {K_0 : 0, K_1 : 1, K_2 : 2, K_3 : 3, K_4 : 4, K_5 : 5, K_6 : 6, K_7 : 7, K_8 : 8, K_9 : 9}
                 if dictt[event.key] == self.answer:
-                    if self.op.operation == "add":
-                        print "You win"
-                        self.op.operation = "sub"
-                        self.numb1 = randint(3, 9)
-                        self.numb2 = randint(0, self.numb1)
-                        self.answer = self.numb2 - self.numb1
-                    elif self.op.operation == "sub":
-                        self.op.operation = "mod"
-                        self.numb2 = randint(1, 4)
-                        self.numb1 = randint(self.numb2 + 1, 9)
-                        self.answer = self.numb1 % self.numb2
-                    elif self.op.operation == "mod":
-                        del self.numb1, self.numb2, self.op
-                        self.time = -10
+                    if self.stage == 0:
+                        self.answer = self.subans
+                        self.stage = 1
+                    elif self.stage == 1:
+                        self.answer = self.modans
+                        self.stage = 2
+                    elif self.stage == 2:
+                        self.stage = 3
+                        self.answer = -1
+                        time = -10
                 else:
                     self.lose()
-        if self.time >= 449:
-            self.lose()
+
 
     def render(self, surface):
         surface.fill((0, 0, 0))
-        self.sprites.draw(surface)
+        if self.stage == 0:
+            self.sprites1.draw(surface)
+        elif self.stage == 1:
+            self.sprites2.draw(surface)
+        elif self.stage == 2:
+            self.sprites3.draw(surface)
 
     def get_timelimit(self):
         return 15
