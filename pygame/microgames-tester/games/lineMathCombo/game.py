@@ -225,6 +225,7 @@ class evade(Microgame):
         self.sprites3 = Group(self.mod1, self.mod2, self.mod)
         self.sprites4 = Group(self.mod_1, self.mod_2, self.mod)
         self.sprites5 = Group(self.mod__1, self.mod__2, self.mod)
+        self.losing = 0
 
         #evade
 
@@ -243,12 +244,12 @@ class evade(Microgame):
         music.play()
         #maths
         self.answer = self.addans
+        self.winner = False
 
     def stop(self):
         #line
         music.stop()
-        self.lose()
-
+ 
     def update(self, events):
         
         #evade
@@ -264,15 +265,8 @@ class evade(Microgame):
             self.ee_eskimo.rect.x = min((locals.WIDTH  / 3)-24, self.ee_eskimo.rect.x + 15)
         for icicle in self.ee_icicles:
             if self.ee_eskimo.rect.colliderect(icicle.rect):
-                music.stop()
-                self.lose()
-
-
-
-
-
-
-
+                self.winner = False
+                self.losing = 1
 
         #line
         self.sprites.update()
@@ -298,8 +292,8 @@ class evade(Microgame):
 
         for icicle in self.e_icicles:
             if self.e_eskimo.rect.colliderect(icicle.rect):
-                music.stop()
-                self.lose()
+                self.winner = False
+                self.losing = 2
             #maths
         for event in events:
             if event.type == KEYDOWN and event.key == K_q:
@@ -320,51 +314,66 @@ class evade(Microgame):
                         self.stage = 4
                         self.answer = self.mod__ans
                     elif self.stage == 4:
-                        self.stage = 5                     
+                        self.stage = 5
+                        self.winner = True                     
                 else:
-                    self.lose()
-
-
-
-
-
-
+                    self.winner = False
+                    self.losing = 3
 
     def render(self, surface):
         surface.fill((0, 0, 0))
-        #line
-        imgpathh = os.path.join("games", "lineMathCombo", "tile.png")
-        test_image = pygame.image.load(imgpathh) 
-        surface.blit(test_image,(0,0))
-        imgpathhh = os.path.join("games", "lineMathCombo", "linesBG.png")
-        test_imagee = pygame.image.load(imgpathhh)
-        surface.blit(test_imagee,(377,0))
-        self.sprites.draw(surface)
+        if self.losing == 1:
+            #evade lose
+            imgpathhhhhhh = os.path.join("games", "lineMathCombo", "retroFail.png")
+            test_imageeeeee = pygame.image.load(imgpathhhhhhh) 
+            surface.blit(test_imageeeeee,(locals.WIDTH / 2, locals.HEIGHT / 2))
+            pass
+        elif self.losing == 2:
+            #line lose
+            imgpathhhhhhhh = os.path.join("games", "lineMathCombo", "minimalistFail.png")
+            test_imageeeeeee = pygame.image.load(imgpathhhhhhhh) 
+            surface.blit(test_imageeeeeee,(locals.WIDTH / 2, locals.HEIGHT / 2))
+            pass
+        elif self.losing == 3:
+            imgpathhhhhhhhh = os.path.join("games", "lineMathCombo", "mathFail.png")
+            test_imageeeeeeee = pygame.image.load(imgpathhhhhhhhh) 
+            surface.blit(test_imageeeeeeee,(locals.WIDTH / 2, locals.HEIGHT / 2))
+            #maths lose
+            pass
+        else:
+            #line
+            imgpathh = os.path.join("games", "lineMathCombo", "tile.png")
+            test_image = pygame.image.load(imgpathh) 
+            surface.blit(test_image,(0,0))
+            imgpathhh = os.path.join("games", "lineMathCombo", "linesBG.png")
+            test_imagee = pygame.image.load(imgpathhh)
+            surface.blit(test_imagee,(377,0))
+            self.sprites.draw(surface)
 
-        #maths
-        imgpathhhh = os.path.join("games", "lineMathCombo", "mathBG.png")
-        test_imageee = pygame.image.load(imgpathhhh)
-        surface.blit(test_imageee,(377,768 / 2))
-        if self.stage == 0:
-            self.sprites1.draw(surface)
-        elif self.stage == 1:
-            self.sprites2.draw(surface)
-        elif self.stage == 2:
-            self.sprites3.draw(surface)
-        elif self.stage == 3:
-            self.sprites4.draw(surface)
-        elif self.stage == 4:
-            self.sprites5.draw(surface)
-        elif self.stage == 5:
-            imgpathhhhhh = os.path.join("games", "lineMathCombo", "finshed.png")
-            test_imageeeee = pygame.image.load(imgpathhhhhh)
-            surface.blit(test_imageeeee,(int(2.0 * locals.WIDTH / 3) - 213, int(3.0 * locals.HEIGHT / 4) - 27))
+            #maths
+            imgpathhhh = os.path.join("games", "lineMathCombo", "mathBG.png")
+            test_imageee = pygame.image.load(imgpathhhh)
+            surface.blit(test_imageee,(377,768 / 2))
+            if self.stage == 0:
+                self.sprites1.draw(surface)
+            elif self.stage == 1:
+                self.sprites2.draw(surface)
+            elif self.stage == 2:
+                self.sprites3.draw(surface)
+            elif self.stage == 3:
+                self.sprites4.draw(surface)
+            elif self.stage == 4:
+                self.sprites5.draw(surface)
+            elif self.stage == 5:
+                imgpathhhhhh = os.path.join("games", "lineMathCombo", "finshed.png")
+                test_imageeeee = pygame.image.load(imgpathhhhhh)
+                surface.blit(test_imageeeee,(int(2.0 * locals.WIDTH / 3) - 213, int(3.0 * locals.HEIGHT / 4) - 27))
 
-        #evade
-        imgpathhhhh = os.path.join("games", "lineMathCombo", "tile.png")
-        test_imageeee = pygame.image.load(imgpathhhhh) 
-        surface.blit(test_imageeee,(0,0))
-        self.esprites.draw(surface)
+            #evade
+            imgpathhhhh = os.path.join("games", "lineMathCombo", "tile.png")
+            test_imageeee = pygame.image.load(imgpathhhhh) 
+            surface.blit(test_imageeee,(0,0))
+            self.esprites.draw(surface)
 
 
 
