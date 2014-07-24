@@ -1,3 +1,5 @@
+# Created by Nathan Yang of Computer Science at SAAST 2014
+
 # Pygame imports
 import os.path
 import pygame, pygame.mixer
@@ -75,6 +77,7 @@ class coin(Sprite):
                 # self.rect.left = randint(0, locals.WIDTH - COIN_WIDTH)
                 # self.velocity = 0
 
+
 class ironman(Sprite):
     def __init__(self):
         Sprite.__init__(self)
@@ -90,6 +93,7 @@ class ironman(Sprite):
 ##### MICROGAME CLASS #########################################################
 
 # TODO: rename this class to your game's name
+# "Hi guyth" -Alan Yao
 # (and change "MyMicrogame" instances throughout)
 class CollectCoinMicrogame(Microgame):
     def __init__(self):
@@ -102,11 +106,13 @@ class CollectCoinMicrogame(Microgame):
 
     def start(self):
         # TODO: Startup code here
-        pass
+        music.load(os.path.join("games", "catching", "super_mario_levels.wav"))
+        music.play()
 
     def stop(self):
         # TODO: Clean-up code here
-        pass
+        music.stop()
+        self.lose()
 
     def update(self, events):
         # TODO: Update code here
@@ -129,12 +135,8 @@ class CollectCoinMicrogame(Microgame):
             self.coins.velocity = 0
             self.coins.rect.left = randint(0, locals.WIDTH - COIN_WIDTH)
                 # self.sprites.update()
-
-
         elif self.coins.rect.top > locals.HEIGHT:
             self.lose()
-        
-
 
     def render(self, surface):
         # TODO: Rendering code here
