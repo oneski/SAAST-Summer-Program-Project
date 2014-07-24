@@ -33,7 +33,7 @@ def thumbnail():
     pass
 
 def hint():
-    return "Don't get overloaded! (Don't die, don't be stupid.)"
+    return "Don't get overloaded!"
     pass
 
 ################################################################################
