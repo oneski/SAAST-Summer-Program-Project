@@ -269,18 +269,18 @@ class evade(Microgame):
             #line
             self.sprites.update()
             for event in events:
-                if event.type == KEYUP and (event.key == K_UP or event.key == K_w) and (event.key == K_DOWN or event.key == K_s):
+                if event.type == KEYDOWN and (event.key == K_UP or event.key == K_w) and (event.key == K_DOWN or event.key == K_s):
                     pass
-                elif event.type == KEYUP and event.key == K_q:
+                elif event.type == KEYDOWN and event.key == K_q:
                     self.win()
-                elif event.type == KEYUP and (event.key == K_UP or event.key == K_w):
+                elif event.type == KEYDOWN and (event.key == K_UP or event.key == K_w):
                     if(self.e_eskimo.rect.centery == 2*locals.HEIGHT/8):
                         self.e_eskimo.rect.centery = locals.HEIGHT/8
                     elif(self.e_eskimo.rect.centery == locals.HEIGHT/8):
                         self.e_eskimo.rect.centery = locals.HEIGHT/8
                     elif(self.e_eskimo.rect.centery == 3*locals.HEIGHT/8):
                         self.e_eskimo.rect.centery = 2*locals.HEIGHT/8
-                elif event.type == KEYUP and (event.key == K_DOWN or event.key == K_s):
+                elif event.type == KEYDOWN and (event.key == K_DOWN or event.key == K_s):
                     if(self.e_eskimo.rect.centery == 2*locals.HEIGHT/8):
                         self.e_eskimo.rect.centery = 3*locals.HEIGHT/8
                     elif(self.e_eskimo.rect.centery == locals.HEIGHT/8):
