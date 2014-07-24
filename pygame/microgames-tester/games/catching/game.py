@@ -27,7 +27,7 @@ def title():
 
 def thumbnail():
     # TODO: Return a (relative path) to the thumbnail image file for your game.
-    return os.path.join('games', 'catching', 'cathy_sierpinski_triangle.jpg')
+    return os.path.join('games', 'catching', '8bitironman_edit.png')
 
 def hint():
     # TODO: Return the hint string for your game.
@@ -146,4 +146,4 @@ class CollectCoinMicrogame(Microgame):
 
     def get_timelimit(self ):
         # TODO: Return the time limit of this game (in seconds)
-        return 20
+        return 15
