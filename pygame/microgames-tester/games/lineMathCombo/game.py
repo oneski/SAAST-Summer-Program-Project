@@ -220,6 +220,7 @@ class evade(Microgame):
         self.sub = rotatingOperation(int(2.0 * locals.WIDTH / 3), "sub")
         self.mod = rotatingOperation(int(2.0 * locals.WIDTH / 3), "mod")
         self.stage = 0
+        self.i = 0
         self.sprites1 = Group(self.add1, self.add2, self.add)
         self.sprites2 = Group(self.sub1, self.sub2, self.sub)
         self.sprites3 = Group(self.mod1, self.mod2, self.mod)
@@ -318,7 +319,9 @@ class evade(Microgame):
                         self.winner = False
                         self.losing = 3
         else:
-            pass
+            self.i += 1
+            if self.i > 60:
+                self.lose()
     def render(self, surface):
         surface.fill((0, 0, 0))
         if self.losing == 1:
