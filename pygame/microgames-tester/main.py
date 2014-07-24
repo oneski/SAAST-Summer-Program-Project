@@ -1,4 +1,4 @@
-import ssys, traceback, pygame
+import sys, traceback, pygame
 import locals, tester
 
 def main(args):

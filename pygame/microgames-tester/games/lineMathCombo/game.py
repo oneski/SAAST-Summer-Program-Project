@@ -25,7 +25,7 @@ def make_game():
     pass
 
 def title():
-    return "Ember Defense + Math"
+    return "Sensory Overload"
     pass
 
 def thumbnail():
@@ -33,7 +33,7 @@ def thumbnail():
     pass
 
 def hint():
-    return "Manage 3 games at once! (Don't DiE)"
+    return "Don't get overloaded! (Don't die, don't be stupid.)"
     pass
 
 ################################################################################
@@ -225,8 +225,6 @@ class evade(Microgame):
         self.sprites3 = Group(self.mod1, self.mod2, self.mod)
         self.sprites4 = Group(self.mod_1, self.mod_2, self.mod)
         self.sprites5 = Group(self.mod__1, self.mod__2, self.mod)
-        self.losing = 0
-
         #evade
 
         self.ee_icicles = [ee_icicle(0) ,ee_icicle(locals.HEIGHT + 70), ee_icicle(100)]
@@ -245,101 +243,102 @@ class evade(Microgame):
         #maths
         self.answer = self.addans
         self.winner = False
-
+        self.losing = 0
     def stop(self):
         #line
         music.stop()
  
     def update(self, events):
-        
-        #evade
-        self.esprites.update()
-        keys = pygame.key.get_pressed()
-        if keys[K_q]:
-            self.win()
-        elif (keys[K_RIGHT] or keys[K_d]) and (keys[K_LEFT] or keys[K_a]):
-            pass
-        elif keys[K_LEFT] or keys[K_a]:
-            self.ee_eskimo.rect.x = max(self.ee_eskimo.rect.x - 15, 0)
-        elif keys[K_RIGHT] or keys[K_d]:
-            self.ee_eskimo.rect.x = min((locals.WIDTH  / 3)-24, self.ee_eskimo.rect.x + 15)
-        for icicle in self.ee_icicles:
-            if self.ee_eskimo.rect.colliderect(icicle.rect):
-                self.winner = False
-                self.losing = 1
-
-        #line
-        self.sprites.update()
-        for event in events:
-            if event.type == KEYUP and (event.key == K_UP or event.key == K_w) and (event.key == K_DOWN or event.key == K_s):
-                pass
-            elif event.type == KEYUP and event.key == K_q:
+        if self.losing == 0:
+            #evade
+            self.esprites.update()
+            keys = pygame.key.get_pressed()
+            if keys[K_q]:
                 self.win()
-            elif event.type == KEYUP and (event.key == K_UP or event.key == K_w):
-                if(self.e_eskimo.rect.centery == 2*locals.HEIGHT/8):
-                    self.e_eskimo.rect.centery = locals.HEIGHT/8
-                elif(self.e_eskimo.rect.centery == locals.HEIGHT/8):
-                    self.e_eskimo.rect.centery = locals.HEIGHT/8
-                elif(self.e_eskimo.rect.centery == 3*locals.HEIGHT/8):
-                    self.e_eskimo.rect.centery = 2*locals.HEIGHT/8
-            elif event.type == KEYUP and (event.key == K_DOWN or event.key == K_s):
-                if(self.e_eskimo.rect.centery == 2*locals.HEIGHT/8):
-                    self.e_eskimo.rect.centery = 3*locals.HEIGHT/8
-                elif(self.e_eskimo.rect.centery == locals.HEIGHT/8):
-                    self.e_eskimo.rect.centery = 2*locals.HEIGHT/8
-                elif(self.e_eskimo.rect.centery == 3*locals.HEIGHT/8):
-                    self.e_eskimo.rect.centery = 3*locals.HEIGHT/8
-
-        for icicle in self.e_icicles:
-            if self.e_eskimo.rect.colliderect(icicle.rect):
-                self.winner = False
-                self.losing = 2
-            #maths
-        for event in events:
-            if event.type == KEYDOWN and event.key == K_q:
-                self.lose()
-            if event.type == KEYDOWN and event.key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
-                dictt = {K_0 : 0, K_1 : 1, K_2 : 2, K_3 : 3, K_4 : 4, K_5 : 5, K_6 : 6, K_7 : 7, K_8 : 8, K_9 : 9}
-                if dictt[event.key] == self.answer:
-                    if self.stage == 0:
-                        self.answer = self.subans
-                        self.stage = 1
-                    elif self.stage == 1:
-                        self.answer = self.modans
-                        self.stage = 2
-                    elif self.stage == 2:
-                        self.stage = 3
-                        self.answer = self.mod_ans
-                    elif self.stage == 3:
-                        self.stage = 4
-                        self.answer = self.mod__ans
-                    elif self.stage == 4:
-                        self.stage = 5
-                        self.winner = True                     
-                else:
+            elif (keys[K_RIGHT] or keys[K_d]) and (keys[K_LEFT] or keys[K_a]):
+                pass
+            elif keys[K_LEFT] or keys[K_a]:
+                self.ee_eskimo.rect.x = max(self.ee_eskimo.rect.x - 15, 0)
+            elif keys[K_RIGHT] or keys[K_d]:
+                self.ee_eskimo.rect.x = min((locals.WIDTH  / 3)-24, self.ee_eskimo.rect.x + 15)
+            for icicle in self.ee_icicles:
+                if self.ee_eskimo.rect.colliderect(icicle.rect):
                     self.winner = False
-                    self.losing = 3
+                    self.losing = 1
 
+            #line
+            self.sprites.update()
+            for event in events:
+                if event.type == KEYUP and (event.key == K_UP or event.key == K_w) and (event.key == K_DOWN or event.key == K_s):
+                    pass
+                elif event.type == KEYUP and event.key == K_q:
+                    self.win()
+                elif event.type == KEYUP and (event.key == K_UP or event.key == K_w):
+                    if(self.e_eskimo.rect.centery == 2*locals.HEIGHT/8):
+                        self.e_eskimo.rect.centery = locals.HEIGHT/8
+                    elif(self.e_eskimo.rect.centery == locals.HEIGHT/8):
+                        self.e_eskimo.rect.centery = locals.HEIGHT/8
+                    elif(self.e_eskimo.rect.centery == 3*locals.HEIGHT/8):
+                        self.e_eskimo.rect.centery = 2*locals.HEIGHT/8
+                elif event.type == KEYUP and (event.key == K_DOWN or event.key == K_s):
+                    if(self.e_eskimo.rect.centery == 2*locals.HEIGHT/8):
+                        self.e_eskimo.rect.centery = 3*locals.HEIGHT/8
+                    elif(self.e_eskimo.rect.centery == locals.HEIGHT/8):
+                        self.e_eskimo.rect.centery = 2*locals.HEIGHT/8
+                    elif(self.e_eskimo.rect.centery == 3*locals.HEIGHT/8):
+                        self.e_eskimo.rect.centery = 3*locals.HEIGHT/8
+
+            for icicle in self.e_icicles:
+                if self.e_eskimo.rect.colliderect(icicle.rect):
+                    self.winner = False
+                    self.losing = 2
+                #maths
+            for event in events:
+                if event.type == KEYDOWN and event.key == K_q:
+                    self.lose()
+                if event.type == KEYDOWN and event.key in (K_0, K_1, K_2, K_3, K_4, K_5, K_6, K_7, K_8, K_9):
+                    dictt = {K_0 : 0, K_1 : 1, K_2 : 2, K_3 : 3, K_4 : 4, K_5 : 5, K_6 : 6, K_7 : 7, K_8 : 8, K_9 : 9}
+                    if dictt[event.key] == self.answer:
+                        if self.stage == 0:
+                            self.answer = self.subans
+                            self.stage = 1
+                        elif self.stage == 1:
+                            self.answer = self.modans
+                            self.stage = 2
+                        elif self.stage == 2:
+                            self.stage = 3
+                            self.answer = self.mod_ans
+                        elif self.stage == 3:
+                            self.stage = 4
+                            self.answer = self.mod__ans
+                        elif self.stage == 4:
+                            self.stage = 5
+                            self.winner = True                     
+                    else:
+                        self.winner = False
+                        self.losing = 3
+        else:
+            pass
     def render(self, surface):
         surface.fill((0, 0, 0))
         if self.losing == 1:
             #evade lose
-            imgpathhhhhhh = os.path.join("games", "lineMathCombo", "retroFail.png")
+            imgpathhhhhhh = os.path.join("games", "lineMathCombo", "classicFail.png")
             test_imageeeeee = pygame.image.load(imgpathhhhhhh) 
-            surface.blit(test_imageeeeee,(locals.WIDTH / 2, locals.HEIGHT / 2))
-            pass
+            surface.blit(test_imageeeeee,(locals.WIDTH / 2 - 323 , locals.HEIGHT / 2 - 38))
+            
         elif self.losing == 2:
             #line lose
             imgpathhhhhhhh = os.path.join("games", "lineMathCombo", "minimalistFail.png")
             test_imageeeeeee = pygame.image.load(imgpathhhhhhhh) 
-            surface.blit(test_imageeeeeee,(locals.WIDTH / 2, locals.HEIGHT / 2))
-            pass
+            surface.blit(test_imageeeeeee,(locals.WIDTH / 2 - 350, locals.HEIGHT / 2 - 346))
+            
         elif self.losing == 3:
             imgpathhhhhhhhh = os.path.join("games", "lineMathCombo", "mathFail.png")
             test_imageeeeeeee = pygame.image.load(imgpathhhhhhhhh) 
-            surface.blit(test_imageeeeeeee,(locals.WIDTH / 2, locals.HEIGHT / 2))
+            surface.blit(test_imageeeeeeee,(locals.WIDTH / 2 -341, locals.HEIGHT / 2 - 118))
             #maths lose
-            pass
+            
         else:
             #line
             imgpathh = os.path.join("games", "lineMathCombo", "tile.png")
