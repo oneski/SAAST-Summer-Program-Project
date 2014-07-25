@@ -1,0 +1,14 @@
+SAAST Computer Science 2014
+Final Project - Microgames!
+
+A collection of student-created microgames created in Python using the Pygame
+framework.  A microgame is a short game that lasts 10-15 seconds.  The overall
+game strings together random sequences of these microgames to create a
+high-action, crazy experience!
+
+Requires Python 2.7 and Pygame installed on your machine.  Run by running
+main.py, e.g., at the command line:
+
+python main.py
+
+All trademarks and copyrights are property of their respective owners.
