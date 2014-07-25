@@ -31,7 +31,7 @@ def thumbnail():
     pass
 
 def hint():
-    return "Evade the icicles! (full)"
+    return "Evade the icicles!"
     pass
 
 ################################################################################

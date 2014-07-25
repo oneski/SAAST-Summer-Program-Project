@@ -120,9 +120,9 @@ class CollectCoinMicrogame(Microgame):
         ctrls = pygame.key.get_pressed()
         if ctrls[K_q]:
             self.win()
-        elif ctrls[K_a]:
+        elif ctrls[K_a] or ctrls[K_LEFT]:
             self.ironman.rect.x = max(self.ironman.rect.x - 30, 0)
-        elif ctrls[K_d]:
+        elif ctrls[K_d] or ctrls[K_RIGHT]:
             self.ironman.rect.x = min(locals.WIDTH - 68, self.ironman.rect.x + 30)
         if self.coins.rect.colliderect(self.ironman):
             # self.time = pygame.time.get_ticks()
