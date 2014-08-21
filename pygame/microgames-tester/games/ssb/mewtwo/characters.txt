@@ -1,0 +1,25 @@
+class Mewtwo(Character):
+    def __init__(self):
+         Character.__init__(self)
+        self.run = [join('games', 'ssb', 'mewtwo', 'runright.png'), join('games', 'ssb', 'mewtwo', 'runleft.png')]
+        self.gun = [join('games', 'ssb', 'mewtwo', 'gunright.png'), join('games', 'ssb', 'mewtwo', 'gunleft.png')]
+        self.idle = [join('games', 'ssb', 'mewtwo', 'idleright.png'), join('games', 'ssb', 'mewtwo', 'idleleft.png')]
+        self.image, self.rect = _load_image(self.idle[0], 0, 0)
+        self.reloadtime = 
+        self.projectilecount = 1
+        self.projectilesound = pygame.mixer.Sound(join('games', 'ssb', 'mewtwo', 'Shadowballs.ogg'))
+        self.jumpsounds =  [pygame.mixer.Sound(join('games', 'ssb', 'mewtwo', 'mewtwogroan.ogg')),
+                            pygame.mixer.Sound(join('games', 'ssb', 'mewtwo', 'mewtwolaugh.ogg')),
+                            pygame.mixer.Sound(join('games', 'ssb', 'mewtwo', 'mewtwojump.ogg'))]
+
+    def make_projectile(self, x, y, charac):
+        if charac.direct == 'right':
+            self.projectile = Mewtwo_Shadow_Ball(x, y + 5)
+            self.projectile.velocity = charac.projectile.velocity
+        elif charac.direct == 'left':
+            self.projectile = Mewtwo_Shadow_Ball(x - 50, y + 5)
+            self.projectile.velocity = charac.projectile.velocity * (-1)
+
+    def projectile_logic(self):
+        if (self.projectilecount == 0) and ((pygame.time.get_ticks() - self.no_projectile_time) >= self.reloadtime):
+            self.projectilecount = 1
