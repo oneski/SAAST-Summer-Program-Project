@@ -78,4 +78,4 @@ def permutate(inputt):
 				iterate(tempListBuilt, tempLeftover) 
 	iterate([], inputt) 
 	return output
-print permutate(range(7))
+print permutate(range(3))
